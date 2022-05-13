@@ -1,0 +1,112 @@
+c:\users\rayha\documents\visual studio 2012\Projects\WhyApp\WhyApp\bin\Debug\WhyApp.exe.config
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\bin\Debug\WhyApp.exe
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\bin\Debug\WhyApp.pdb
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.csprojResolveAssemblyReference.cache
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.Properties.Resources.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.csproj.GenerateResource.Cache
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.exe
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.pdb
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.ChatForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.RoomForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.LoginForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp\WhyApp\obj\Debug\WhyApp.RegisterForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\WhyApp.exe.config
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\WhyApp.exe
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\WhyApp.pdb
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Oracle.DataAccess.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.csproj.AssemblyReference.cache
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.ChatForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.RoomForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.LoginForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.Properties.Resources.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.RegisterForm.resources
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.csproj.GenerateResource.cache
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.csproj.CoreCompileInputs.cache
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.csproj.CopyComplete
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.exe
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\obj\Debug\WhyApp.pdb
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Common.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Custom.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Receivers.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Reactive.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Threading.Channels.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Threading.Tasks.Dataflow.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.ValueTuple.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Web.Http.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Websocket.Client.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Common.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Custom.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Receivers.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Reactive.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Threading.Channels.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Threading.Tasks.Dataflow.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.ValueTuple.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\System.Web.Http.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\Websocket.Client.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\H.Engine.IO.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\H.Socket.IO.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\H.WebSockets.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\H.Engine.IO.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\H.Socket.IO.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\H.WebSockets.xml
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\SocketIOClient.NetFx.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\websocket-sharp.dll
+C:\Users\rayha\Documents\Visual Studio 2012\Projects\WhyApp - Copy\WhyApp\bin\Debug\SocketIOClient.NetFx.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.exe.config
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.exe
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.pdb
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Engine.IO.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Socket.IO.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.WebSockets.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Common.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Custom.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Receivers.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Oracle.DataAccess.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\SocketIOClient.NetFx.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Reactive.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Threading.Channels.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Threading.Tasks.Dataflow.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.ValueTuple.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Web.Http.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\websocket-sharp.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Websocket.Client.dll
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Engine.IO.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Socket.IO.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.WebSockets.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Common.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Custom.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Receivers.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\SocketIOClient.NetFx.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Reactive.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Threading.Channels.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Threading.Tasks.Dataflow.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.ValueTuple.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Web.Http.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Websocket.Client.xml
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.csproj.AssemblyReference.cache
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ChatForm.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.RoomForm.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.LoginForm.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.Properties.Resources.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.RegisterForm.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.csproj.GenerateResource.cache
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.csproj.CoreCompileInputs.cache
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.csproj.CopyComplete
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.exe
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.pdb

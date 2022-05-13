@@ -1,0 +1,6 @@
+python-socketio==4.6.0
+python-engineio==3.13.2
+Flask-SocketIO==4.3.1
+Werkzeug==2.0.0
+eventlet==0.33.1
+cx-Oracle==8.3.0
