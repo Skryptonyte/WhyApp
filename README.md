@@ -13,6 +13,12 @@ Install required dependencies as follows
 
 NOTE: Very important to install these specific versions! Otherwise you will face compatibility issues as none of the C# socketio client libraries support socket.io v5 as of the time of typing this README. 
 
+To run the server:
+
+` python <scriptLocation> <username> <password> `
+
+NOTE: username and password refers to the credentials on the Oracle SQL installation
+
 SQL script is provided to be run manually as well to do the necessary initialization. (TODO: Automate within the python script maybe)
 
 ## Frontend
