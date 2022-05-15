@@ -23,19 +23,31 @@ namespace WhyApp
         int chatroomID;
         int userID;
         SocketIO client;
-        public ChatForm(int chatroomID, int userID)
+        string domainName;
+        public ChatForm(string domainName, int chatroomID, string roomName, int userID)
         {
             InitializeComponent();
+            this.domainName = domainName;
             this.chatroomID = chatroomID;
             this.userID = userID;
+            this.Text = "Chat Room: " + roomName;
+            this.postButton.Enabled = false;
             testChat();
         }
 
         public async Task<int> testChat()
         {
-            this.client = new SocketIO("ws://127.0.0.1:5000/");
+            int i = await fillChatRequest();
+
+            if (i != 1)
+            {
+                MessageBox.Show("Couldn't connect to server :(");
+                return 0;
+            }
+            this.client = new SocketIO($"ws://{domainName}:5000/");
             client.OnConnected += async (sender, e) =>
             {
+                toggleButtonEnable(true);
                 var joinDetails = new Dictionary<string, string>
                 {
                 { "user_id", userID.ToString() },
@@ -47,7 +59,13 @@ namespace WhyApp
                 await client.EmitAsync("joinChat",joinJSONStr);
             };
 
-            client.On("recievePost", response =>
+            client.OnDisconnected += async (sender, e) =>
+            {
+
+                toggleButtonEnable(false);
+                Console.WriteLine("WARN: Backend server disconnected");
+            };
+            client.On("recievePost",  response =>
             {
                 var jsonstr = response.GetValue<string>();
                 //var jsonstr = response.ToString();
@@ -58,7 +76,37 @@ namespace WhyApp
             });
 
             await client.ConnectAsync();
-            return 0;
+            return 1;
+        }
+
+        public async Task<int> fillChatRequest()
+        {
+            HttpClient hc = new HttpClient();
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}:5000/api/posts/{chatroomID}");
+
+            response.EnsureSuccessStatusCode();
+
+            HttpContent content = response.Content;
+            string rawstr = await content.ReadAsStringAsync();
+            DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(rawstr);
+
+            int t = dt.Rows.Count;
+
+            updateChat(dt);
+
+            return 1;
+        }
+
+        public void toggleButtonEnable(bool val)
+        {
+            if (postButton.InvokeRequired)
+            {
+                Action safeToggle = delegate { toggleButtonEnable(val); };
+                postButton.Invoke(safeToggle);
+                return;
+            }
+
+            postButton.Enabled = val;
         }
         public void updateChat( DataTable dt)
         {
@@ -69,14 +117,16 @@ namespace WhyApp
                 richTextBox1.Invoke(safeUpdate);
                 return;
             }
-
+            string chatFull = "";
             int t = dt.Rows.Count;
             for (int i = 0; i < t; i++)
             {
                 DataRow dr = dt.Rows[i];
-                richTextBox1.Text += "[" + dr["createDate"] + "]" + " " + dr["username"].ToString() + ": " + dr["content"].ToString() + "\n";
+                chatFull += "[" + dr["createDate"] + "]" + " " + dr["username"].ToString() + ": " + dr["content"].ToString() + "\n";
 
             }
+
+            richTextBox1.Text += chatFull;
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

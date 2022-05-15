@@ -14,8 +14,10 @@ namespace WhyApp
     public partial class RoomForm : Form
     {
         int userID;
-        public RoomForm( int userID)
+        string domainName;
+        public RoomForm( string domainName, int userID)
         {
+            this.domainName = domainName;
             InitializeComponent();
             this.userID = userID;
             listRooms();
@@ -26,7 +28,7 @@ namespace WhyApp
         {
             Console.WriteLine("Async room list");
             HttpClient hc = new HttpClient();
-            HttpResponseMessage response = await hc.GetAsync($"http://localhost:5000/api/rooms");
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}:5000/api/rooms");
 
             response.EnsureSuccessStatusCode();
 
@@ -52,7 +54,9 @@ namespace WhyApp
             if (index < 0)
                 return;
             int roomID = Convert.ToInt32(dataGridView1.Rows[index].Cells[0].Value);
-            ChatForm ch = new ChatForm(roomID,userID);
+            string roomName = Convert.ToString(dataGridView1.Rows[index].Cells[1].Value);
+
+            ChatForm ch = new ChatForm(domainName, roomID, roomName, userID);
             ch.Show();
         }
     }

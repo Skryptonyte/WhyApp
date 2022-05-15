@@ -66,6 +66,7 @@
             // 
             // listView1
             // 
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(983, 33);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(210, 205);
@@ -92,7 +93,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "ChatForm";
-            this.Text = "ChatForm";
+            this.Text = "Chat";
             this.ResumeLayout(false);
             this.PerformLayout();
 
