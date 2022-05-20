@@ -44,7 +44,7 @@ namespace WhyApp
                 MessageBox.Show("Couldn't connect to server :(");
                 return 0;
             }
-            this.client = new SocketIO($"ws://{domainName}:5000/");
+            this.client = new SocketIO($"ws://{domainName}/");
             client.OnConnected += async (sender, e) =>
             {
                 toggleButtonEnable(true);
@@ -82,7 +82,7 @@ namespace WhyApp
         public async Task<int> fillChatRequest()
         {
             HttpClient hc = new HttpClient();
-            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}:5000/api/posts/{chatroomID}");
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}/api/posts/{chatroomID}");
 
             response.EnsureSuccessStatusCode();
 
@@ -135,13 +135,15 @@ namespace WhyApp
 
         async Task<int> sendPost(int user_id, int room_id, string content)
         {
+            if (string.IsNullOrEmpty(this.textBox1.Text))
+                return -1;
             var chatPost = new Dictionary<string, string>
             {
                 { "user_id", user_id.ToString() },
                 { "room_id", room_id.ToString()},
                 { "content", content }
             };
-            
+            this.textBox1.Text = "";
             await client.EmitAsync("postChat", JsonConvert.SerializeObject(chatPost));
             return 0;
         }

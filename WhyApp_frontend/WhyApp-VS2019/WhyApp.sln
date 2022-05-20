@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhyApp", "WhyApp\WhyApp.csproj", "{7505339E-2781-4DB6-9006-C56C685AC755}"
 EndProject
 Global
@@ -8,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7505339E-2781-4DB6-9006-C56C685AC755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7505339E-2781-4DB6-9006-C56C685AC755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7505339E-2781-4DB6-9006-C56C685AC755}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{7505339E-2781-4DB6-9006-C56C685AC755}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{7505339E-2781-4DB6-9006-C56C685AC755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7505339E-2781-4DB6-9006-C56C685AC755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2237720-495D-446B-928B-97D9618B23A6}
 	EndGlobalSection
 EndGlobal

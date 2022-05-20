@@ -1,5 +1,5 @@
 
-create table chatuser (user_id int, username varchar(30), password varchar(30), joindate date, primary key(user_id));
+create table chatuser (user_id int, username varchar(30), password varchar(30), joindate date, primary key(user_id), unique(username));
 create table rooms (room_id int, room_name varchar(20), room_desc varchar(100), primary key(room_id));
 create table posts (post_id int, user_id int, room_id int, content varchar(256), createdate timestamp, primary key(post_id), foreign key(user_id) references chatuser, foreign key(room_id) references rooms)
 

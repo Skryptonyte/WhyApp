@@ -22,7 +22,7 @@ namespace WhyApp
         async Task<int> loginRequest(string username, string password)
         {
             HttpClient hc = new HttpClient();
-            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}:5000/api/login?username={username}&password={password}");
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}/api/login?username={username}&password={password}");
 
             response.EnsureSuccessStatusCode();
 
@@ -37,19 +37,29 @@ namespace WhyApp
         }
         private async void loginButton_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrEmpty(usernameBox.Text) || string.IsNullOrEmpty(passBox.Text))
             {
                 MessageBox.Show("Both username and password are mandatory", "Notice");
                 return;
             }
-
-            int userID = await loginRequest(usernameBox.Text, passBox.Text);
-
-            if (userID != -1)
+            int userID = -1;
+            try
+            {
+                userID = await loginRequest(usernameBox.Text, passBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show($"Unable to connect to domain {domainName}", "Error");
+                return;
+            }
+            if (userID >= 0)
             {
                 RoomForm rf = new RoomForm(domainName, userID);
                 rf.Show();
+            }
+            else if(userID == -1)
+            {
+                MessageBox.Show("Incorrect username/password!","Auth Failed");
             }
         }
 
@@ -58,6 +68,11 @@ namespace WhyApp
             RegisterForm rf = new RegisterForm(domainName);
             rf.Show();
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.domainName = this.textBox1.Text;
         }
     }
 }

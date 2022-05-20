@@ -28,7 +28,7 @@ namespace WhyApp
         {
             Console.WriteLine("Async room list");
             HttpClient hc = new HttpClient();
-            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}:5000/api/rooms");
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}/api/rooms");
 
             response.EnsureSuccessStatusCode();
 
