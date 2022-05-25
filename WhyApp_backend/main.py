@@ -40,7 +40,10 @@ def getPosts(room_id):
     cursor = conn.cursor()
 
     postRows = []
-    for row in cursor.execute(f"select p.post_id, cu.username, p.content, p.createDate, a.attachment_id from (posts p natural join chatUser cu) left join attachments a on p.post_id = a.post_id where room_id = {room_id} order by createdate"):
+    for row in cursor.execute(f"""
+    with p as (select user_id, post_id, createDate, content from posts where room_id={room_id} order by createdate)
+    select p.post_id, cu.username, p.content, p.createDate, a.attachment_id from (p natural join chatUser cu) left join attachments a on p.post_id = a.post_id 
+    """):
         atid = -1
         if (row[4] is not None):
             atid = row[4]
@@ -152,7 +155,10 @@ def postChat(json_str):
         print("Inserted POST ID:",insertedPostID)
         if (attach_id != -1):
             cursor.execute("update attachments set post_id=:postid where attachment_id=:attach_id",(insertedPostID,attach_id))
-        cursor.execute(f"select p.post_id, cu.username, p.createDate, p.content, a.attachment_id from (posts p natural join chatUser cu)  left join attachments a on p.post_id = a.post_id where p.post_id={insertedPostID}")
+        cursor.execute(f"""
+        with p as (select user_id, post_id, createDate, content from posts where post_id={insertedPostID})
+        select p.post_id, cu.username, p.createDate, p.content from (p natural join chatUser cu)
+        """)
         row = (cursor.fetchone())
 
         jsonBroadcast = {}
@@ -160,10 +166,14 @@ def postChat(json_str):
         jsonBroadcast['username'] = row[1]
         jsonBroadcast['createDate'] = str(row[2])
         jsonBroadcast['content'] = row[3]
+        """
         if (row[4] is None):
             jsonBroadcast['attach_id'] = -1
         else:
-            jsonBroadcast['attach_id'] = str(row[4])
+            jsonBroadcast['attach_id'] = attach_id
+        """
+
+        jsonBroadcast['attach_id'] = attach_id
         print("File Path: ",row[4])
         jsonBroadcastStr = (json.dumps(jsonBroadcast))
         jsonBroadcastStr = "[" + jsonBroadcastStr + "]"
