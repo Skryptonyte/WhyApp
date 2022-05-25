@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -24,6 +25,8 @@ namespace WhyApp
         int userID;
         SocketIO client;
         string domainName;
+        string attachedFile = "";
+        int loadedAttachID;
         public ChatForm(string domainName, int chatroomID, string roomName, int userID)
         {
             InitializeComponent();
@@ -72,7 +75,7 @@ namespace WhyApp
                 Console.WriteLine("Got receieved Chat: "+jsonstr);
                 DataTable dt = JsonConvert.DeserializeObject<DataTable>(jsonstr);
 
-                updateChat(dt);
+                updateChat2(dt);
             });
 
             await client.ConnectAsync();
@@ -92,7 +95,7 @@ namespace WhyApp
 
             int t = dt.Rows.Count;
 
-            updateChat(dt);
+            updateChat2(dt);
 
             return 1;
         }
@@ -128,6 +131,58 @@ namespace WhyApp
 
             richTextBox1.Text += chatFull;
         }
+
+        public async void updateChat2(DataTable dt)
+        {
+
+            if (chatPanel.InvokeRequired)
+            {
+                Action safeUpdate = delegate { updateChat2(dt); };
+                chatPanel.Invoke(safeUpdate);
+                return;
+            }
+            string chatFull = "";
+            int t = dt.Rows.Count;
+
+            chatPanel.SuspendLayout();
+
+            // ib.loadImage("C:/Users/rayha/Pictures/Pictures/V0AE3xf.jpg");
+
+            for (int i = 0; i < t; i++)
+            {
+                int attach_id;
+                
+                DataRow dr = dt.Rows[i];
+
+                int.TryParse(dr["attach_id"].ToString(), out attach_id);
+
+                string chatLine = "[" + dr["createDate"] + "]" + " " + dr["username"].ToString() + ": " + dr["content"].ToString() + "\n";
+
+                ChatBubble cb = new ChatBubble();
+                cb.setMessage(chatLine);
+
+                chatPanel.Controls.Add(cb);
+
+                if (attach_id != -1)
+                {
+                    try
+                    {
+                        ImageChatBubble ib = new ImageChatBubble();
+                        Console.WriteLine("Attach ID: " + attach_id);
+                        ib.loadImage($"http://{domainName}/api/download/{attach_id}");
+                        chatPanel.Controls.Add(ib);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("WARN: Failed to load attachment");
+                    }
+                }
+            }
+
+            
+            chatPanel.ResumeLayout();
+            chatPanel.VerticalScroll.Value = chatPanel.VerticalScroll.Maximum;
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -137,14 +192,39 @@ namespace WhyApp
         {
             if (string.IsNullOrEmpty(this.textBox1.Text))
                 return -1;
+
+            
+            int attach_id = -1;
+            if (!string.IsNullOrEmpty(attachedFile))
+            {
+                Stream stream = File.Open(attachedFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+                StreamContent sc = new StreamContent(stream);
+                HttpClient hc = new HttpClient();
+
+                HttpResponseMessage response = await hc.PostAsync($"http://{domainName}/api/upload", sc);
+
+                response.EnsureSuccessStatusCode();
+
+                string rawstr = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine("Receieved Attach ID" + rawstr);
+                int.TryParse(rawstr, out attach_id);
+            }
+
+            
+
             var chatPost = new Dictionary<string, string>
             {
                 { "user_id", user_id.ToString() },
                 { "room_id", room_id.ToString()},
-                { "content", content }
+                { "content", content },
+                { "attach_id", attach_id.ToString() }
             };
             this.textBox1.Text = "";
             await client.EmitAsync("postChat", JsonConvert.SerializeObject(chatPost));
+
+            this.attachedFile = "";
+            this.attachLabel.Text = "";
             return 0;
         }
         private async void postButton_Click(object sender, EventArgs e)
@@ -156,6 +236,18 @@ namespace WhyApp
         {
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             richTextBox1.ScrollToCaret();
+        }
+
+        private async void attachButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+
+            if (of.ShowDialog() == DialogResult.OK)
+            {
+                string fn = of.FileName;
+                this.attachedFile = fn;
+                this.attachLabel.Text = fn;
+            }
         }
     }
 }

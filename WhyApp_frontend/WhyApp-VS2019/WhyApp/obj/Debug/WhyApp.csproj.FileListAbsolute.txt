@@ -64,11 +64,9 @@ C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Deb
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.exe
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.pdb
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Engine.IO.dll
-C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Socket.IO.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.WebSockets.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Common.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Custom.dll
-C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Receivers.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Oracle.DataAccess.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\SocketIOClient.NetFx.dll
@@ -83,11 +81,9 @@ C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Deb
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\websocket-sharp.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Websocket.Client.dll
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Engine.IO.xml
-C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.Socket.IO.xml
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\H.WebSockets.xml
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Common.xml
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Custom.xml
-C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Microsoft.AspNet.WebHooks.Receivers.xml
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\Newtonsoft.Json.xml
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\SocketIOClient.NetFx.xml
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\System.Net.Http.Formatting.xml
@@ -110,3 +106,9 @@ C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Deb
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.csproj.CopyComplete
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.exe
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.pdb
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.exe.manifest
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Debug\WhyApp.application
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ChatBubble.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ImageChatBubble.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.exe.manifest
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.application

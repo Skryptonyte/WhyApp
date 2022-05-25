@@ -13,7 +13,7 @@ namespace WhyApp
 {
     public partial class LoginForm : Form
     {
-        string domainName = "localhost";
+        string domainName = "localhost:5000";
         public LoginForm()
         {
             InitializeComponent();

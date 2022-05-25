@@ -49,3 +49,5 @@ C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Rel
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\bin\Release\WhyApp.application
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Release\WhyApp.exe.manifest
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Release\WhyApp.application
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Release\WhyApp.ChatBubble.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Release\WhyApp.ImageChatBubble.resources

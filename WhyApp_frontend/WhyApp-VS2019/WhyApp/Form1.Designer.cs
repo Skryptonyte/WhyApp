@@ -55,6 +55,7 @@
             // 
             // Column1
             // 
+            this.Column1.DataPropertyName = "room_id";
             this.Column1.HeaderText = "Room ID";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -62,6 +63,7 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.DataPropertyName = "room_name";
             this.Column2.HeaderText = "Room Name";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -86,7 +88,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewLinkColumn Column2;
-
     }
 }
 

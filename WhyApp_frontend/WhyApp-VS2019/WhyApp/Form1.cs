@@ -36,14 +36,8 @@ namespace WhyApp
             string rawstr = await content.ReadAsStringAsync();
             DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(rawstr);
 
-            int t = dt.Rows.Count;
-
-            for (int i = 0; i < t; i++)
-            {
-                DataRow dr = dt.Rows[i];
-                string[] row = { dr["room_id"].ToString(), dr["room_name"].ToString() };
-                dataGridView1.Rows.Add(row);
-            }
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = dt;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
