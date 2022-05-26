@@ -92,7 +92,7 @@ def uploadAttachment():
             if (magicobj is None or not (magicobj.mime.startswith("image"))):
                 print("Magic object: ",magicobj)
                 try:
-                    print("MIME type: ",magicobj.mimetype)
+                    print("MIME type: ",magicobj.mime)
                 except Exception as e:
                     print("no object :(")
                 print("Attachment is not image. Rejecting!")

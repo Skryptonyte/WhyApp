@@ -81,8 +81,13 @@ namespace WhyApp
             });
             client.On("errorMessage", response =>
             {
-                string errMsg = response.GetValue<string>();
-                MessageBox.Show(errMsg,"Error");
+            string errMsg = response.GetValue<string>();
+            MessageBox.Show(errMsg, "Error");
+
+            this.Invoke((MethodInvoker) delegate
+                    {
+                    this.Close();
+            });
             });
 
             await client.ConnectAsync();
