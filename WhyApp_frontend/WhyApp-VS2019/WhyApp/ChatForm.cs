@@ -30,6 +30,8 @@ namespace WhyApp
         public ChatForm(string domainName, int chatroomID, string roomName, int userID)
         {
             InitializeComponent();
+            this.FormClosing += FormClosed;
+
             this.domainName = domainName;
             this.chatroomID = chatroomID;
             this.userID = userID;
@@ -77,6 +79,11 @@ namespace WhyApp
 
                 updateChat2(dt);
             });
+            client.On("errorMessage", response =>
+            {
+                string errMsg = response.GetValue<string>();
+                MessageBox.Show(errMsg,"Error");
+            });
 
             await client.ConnectAsync();
             return 1;
@@ -111,26 +118,6 @@ namespace WhyApp
 
             postButton.Enabled = val;
         }
-        public void updateChat( DataTable dt)
-        {
-
-            if (richTextBox1.InvokeRequired)
-            {
-                Action safeUpdate = delegate { updateChat(dt); };
-                richTextBox1.Invoke(safeUpdate);
-                return;
-            }
-            string chatFull = "";
-            int t = dt.Rows.Count;
-            for (int i = 0; i < t; i++)
-            {
-                DataRow dr = dt.Rows[i];
-                chatFull += "[" + dr["createDate"] + "]" + " " + dr["username"].ToString() + ": " + dr["content"].ToString() + "\n";
-
-            }
-
-            richTextBox1.Text += chatFull;
-        }
 
         public async void updateChat2(DataTable dt)
         {
@@ -156,10 +143,12 @@ namespace WhyApp
 
                 int.TryParse(dr["attach_id"].ToString(), out attach_id);
 
-                string chatLine = "[" + dr["createDate"] + "]" + " " + dr["username"].ToString() + ": " + dr["content"].ToString() + "\n";
-
+                string userStr = dr["username"].ToString() + " [" + dr["rank_name"] + "]";
+                //string chatLine = "[" + dr["createDate"] + "]" + " " + dr["username"].ToString() + "[" + dr["rank_name"] +"]" +": " + dr["content"].ToString() + "\n";
+                string chatLine = dr["content"].ToString();
                 ChatBubble cb = new ChatBubble();
                 cb.setMessage(chatLine);
+                cb.setUser(userStr, dr["rank_color"].ToString());
 
                 chatPanel.Controls.Add(cb);
 
@@ -232,12 +221,6 @@ namespace WhyApp
             await sendPost(this.userID, this.chatroomID, this.textBox1.Text);
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            richTextBox1.ScrollToCaret();
-        }
-
         private async void attachButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
@@ -249,5 +232,12 @@ namespace WhyApp
                 this.attachLabel.Text = fn;
             }
         }
+
+        private void FormClosed(object sender, FormClosingEventArgs e )
+        {
+            this.client.DisconnectAsync();
+
+        }
+
     }
 }

@@ -40,15 +40,19 @@ def getPosts(room_id):
     cursor = conn.cursor()
 
     postRows = []
-    for row in cursor.execute(f"""
-    with p as (select user_id, post_id, createDate, content from posts where room_id={room_id} order by createdate)
-    select p.post_id, cu.username, p.content, p.createDate, a.attachment_id from (p natural join chatUser cu) left join attachments a on p.post_id = a.post_id 
-    """):
+
+    query = f"""
+    with p as (select user_id, post_id, createDate, content from posts where room_id={room_id} order by createdate),
+    cu as (select * from chatUser natural join ranks)
+    select p.post_id, cu.username, p.content, p.createDate, a.attachment_id, cu.rank_name, cu.rank_color from (p natural join cu ) left join attachments a on p.post_id = a.post_id
+    """
+    
+    for row in cursor.execute(query):
         atid = -1
         if (row[4] is not None):
             atid = row[4]
             print("Kek: ",atid)
-        postRows.append({'post_id':row[0], 'username': row[1], 'content': row[2], 'createDate': row[3], 'attach_id': atid})
+        postRows.append({'post_id':row[0], 'username': row[1], 'content': row[2], 'createDate': row[3], 'attach_id': atid, 'rank_name':row[5], 'rank_color': row[6]})
 
     return jsonify(postRows)
 
@@ -75,12 +79,25 @@ def registerUser():
 def uploadAttachment():
     filename = str(uuid.uuid4())
     f = open("uploads/"+filename,"wb+")
+    firstChunk = 1
     while True:
         chunk = request.stream.read(1024)
         if len(chunk) == 0:
             break
-
         f.write(chunk)
+
+        if (firstChunk):
+            f.flush()
+            magicobj=filetype.guess("uploads/"+filename)
+            if (magicobj is None or not (magicobj.mime.startswith("image"))):
+                print("Magic object: ",magicobj)
+                try:
+                    print("MIME type: ",magicobj.mimetype)
+                except Exception as e:
+                    print("no object :(")
+                print("Attachment is not image. Rejecting!")
+                return "-1"
+            firstChunk = 0
 
     cursor = conn.cursor()
     try:
@@ -125,6 +142,8 @@ def downloadAttachment(attach_id):
 
         return "Stream failed"
 
+uid_to_sid = {}
+sid_to_uid = {}
 @socketio.on("joinChat")
 def joinRoom(json_str):
     jsonDict = json.loads(json_str)
@@ -132,8 +151,46 @@ def joinRoom(json_str):
     user_id = jsonDict["user_id"]
     room_id = jsonDict["room_id"]
 
+    if (uid_to_sid.get(int(user_id),None)):
+        emit("errorMessage","Already connected to a room")
+        print(user_id," is already present")
+        return
+
+    try:
+        
+        cursor = conn.cursor()
+        
+        cursor.execute("delete from bans where user_id=:userid and current_timestamp > enddate",(user_id, ))
+        conn.commit()
+        cursor.execute("select user_id, room_id, ban_reason, startdate from bans where user_id=:userid and room_id=:roomid",(user_id,room_id))
+
+        row = cursor.fetchone()
+        if (row is not None):
+            print(f"Banned user {user_id} attempting to join {room_id}")
+            emit("errorMessage", f"You are banned on {row[3]} from this room for reason '{row[2]}'")
+            return
+    except Exception as e:
+        print(e)
+        return
+    print("Mapping SID and UID for",user_id)
+    uid_to_sid[int(user_id)] = request.sid
+    sid_to_uid[request.sid] = int(user_id)
+
     join_room(room_id)
     print("UID",user_id, "has joined the room ID",room_id)
+
+@socketio.on('disconnect')
+def connect():
+    sid = request.sid
+
+    if (not sid_to_uid.get(sid,None)):
+        print("Unidentified client disconnected")
+        return
+    uid = sid_to_uid[sid]
+    print("UID "+str(uid)+" has disconnected")
+
+    uid_to_sid.pop(uid)
+    sid_to_uid.pop(sid)
 
 @socketio.on("postChat")
 def postChat(json_str):
@@ -156,8 +213,9 @@ def postChat(json_str):
         if (attach_id != -1):
             cursor.execute("update attachments set post_id=:postid where attachment_id=:attach_id",(insertedPostID,attach_id))
         cursor.execute(f"""
-        with p as (select user_id, post_id, createDate, content from posts where post_id={insertedPostID})
-        select p.post_id, cu.username, p.createDate, p.content from (p natural join chatUser cu)
+        with p as (select user_id, post_id, createDate, content from posts where post_id={insertedPostID}), 
+        cu as (select user_id, username, rank_name, rank_color from chatUser natural join ranks)
+        select p.post_id, cu.username, p.createDate, p.content,cu.rank_name, cu.rank_color from (p natural join cu)
         """)
         row = (cursor.fetchone())
 
@@ -166,6 +224,8 @@ def postChat(json_str):
         jsonBroadcast['username'] = row[1]
         jsonBroadcast['createDate'] = str(row[2])
         jsonBroadcast['content'] = row[3]
+        jsonBroadcast['rank_name'] = row[4]
+        jsonBroadcast['rank_color'] = row[5]
         """
         if (row[4] is None):
             jsonBroadcast['attach_id'] = -1

@@ -74,5 +74,9 @@ namespace WhyApp
         {
             this.domainName = this.textBox1.Text;
         }
+
+
     }
+
+    
 }

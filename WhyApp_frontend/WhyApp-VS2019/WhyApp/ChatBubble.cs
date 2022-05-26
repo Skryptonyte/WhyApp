@@ -23,7 +23,17 @@ namespace WhyApp
             this.label1.Text = message;
         }
 
+        public void setUser(string userString, string colour_name="blue")
+        {
+            this.label2.Text = userString;
+            this.label2.ForeColor = Color.FromName(colour_name);
+        }
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
