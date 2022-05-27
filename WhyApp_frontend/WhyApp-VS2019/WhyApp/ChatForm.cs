@@ -36,7 +36,6 @@ namespace WhyApp
             this.userID = userID;
             this.Text = "Chat Room: " + roomName;
             this.postButton.Enabled = false;
-            testChat();
         }
 
         public async Task<int> testChat()

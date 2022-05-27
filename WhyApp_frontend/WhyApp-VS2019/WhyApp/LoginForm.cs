@@ -27,6 +27,8 @@ namespace WhyApp
             
             if (mode==1)
                 response = await hc.GetAsync($"http://{domainName}/api/moderator/login?username={username}&password={password}");
+            else if (mode == 2)
+                response = await hc.GetAsync($"http://{domainName}/api/administrator/login?username={username}&password={password}");
             else
                 response = await hc.GetAsync($"http://{domainName}/api/login?username={username}&password={password}");
             response.EnsureSuccessStatusCode();
@@ -92,8 +94,30 @@ namespace WhyApp
                     MessageBox.Show("Incorrect username/password!", "Auth Failed");
                 }
             }
-
+            else if (loginAltBox.SelectedIndex == 2)
+            {
+                try
+                {
+                    userID = await loginRequest(usernameBox.Text, passBox.Text, 2);
+                }
+                catch
+                {
+                    MessageBox.Show($"Unable to connect to domain {domainName}", "Error");
+                    return;
+                }
+                if (userID >= 0)
+                {
+                    AdminForm mf = new AdminForm(domainName);
+                    mf.Show();
+                }
+                else if (userID == -1)
+                {
+                    MessageBox.Show("Incorrect username/password!", "Auth Failed");
+                }
+            }
         }
+
+        
 
         private void registerButton_Click(object sender, EventArgs e)
         {

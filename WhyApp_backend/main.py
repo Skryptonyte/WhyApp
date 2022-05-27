@@ -11,6 +11,8 @@ conn = cx_Oracle.connect(user=sys.argv[1],password=sys.argv[2],events=True)
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
+ADMIN_USERNAME="admin"
+ADMIN_PASSWORD="admin"
 ########################
 #### Authentication ####
 ########################
@@ -45,6 +47,15 @@ def validateModLogin():
     else:
         return "-1"
 
+@app.route('/api/administrator/login',methods=['GET'])
+def validateAdminLogin():
+    username=request.args.get("username")
+    password=request.args.get("password")
+
+    if (username == ADMIN_USERNAME and password == ADMIN_PASSWORD):
+        return "1"
+    else:
+        return "-1"
 # Register regular user
 @app.route("/api/register", methods=['POST'])
 def registerUser():
@@ -116,8 +127,64 @@ def unbanUser():
         print(e)
         return str(e)
     return f"Unban applied to {user_id}"
-    pass
 
+@app.route("/api/rooms/create", methods=['POST'])
+def createRoom():
+    json = request.get_json()
+    try:
+        room_name = json['room_name']
+        room_desc = json['room_desc']
+
+        cursor = conn.cursor()
+        cursor.execute("""
+            insert into rooms values(roomIDGenerator.nextVal, :roomname, :room_desc)
+        """, (room_name, room_desc))
+        conn.commit()
+
+        return "Room created"
+
+    except Exception as e:
+        return str(e)
+
+@app.route("/api/rooms/delete", methods=['POST'])
+def deleteRoom():
+    json = request.get_json()
+    try:
+        room_id = json['room_id']
+
+        cursor = conn.cursor()
+        cursor.execute("""
+            delete from rooms where room_id = :roomid
+        """, (room_id,))
+        conn.commit()
+
+        return "Room deleted"
+
+    except Exception as e:
+        print(e)
+        return str(e)
+
+@app.route("/api/posts/deleteAll", methods=['DELETE'])
+def purgePost():
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            delete from posts
+        """)
+        conn.commit()
+        return "All posts purged successfully"
+    except Exception as e:
+        print(e)
+        return str(e)
+@app.route('/api/moderators',methods=['GET'])
+def getModerators():
+    cursor = conn.cursor()
+
+    userRows = []
+    for row in cursor.execute("select m_id, username from moderators"):
+        userRows.append({'m_id':row[0], 'username': row[1]})
+
+    return jsonify(userRows)
 ########################
 #### Data Retrieval ####
 ########################
@@ -137,8 +204,8 @@ def getRooms():
     cursor = conn.cursor()
 
     roomRows = []
-    for row in cursor.execute("select room_id, room_name from rooms"):
-        roomRows.append({'room_id':row[0], 'room_name': row[1]})
+    for row in cursor.execute("select room_id, room_name, room_desc from rooms"):
+        roomRows.append({'room_id':row[0], 'room_name': row[1], 'room_desc': row[2]})
 
     return jsonify(roomRows)
 

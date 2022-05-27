@@ -115,7 +115,8 @@
             this.loginAltBox.FormattingEnabled = true;
             this.loginAltBox.Items.AddRange(new object[] {
             "User",
-            "Moderator"});
+            "Moderator",
+            "Administrator"});
             this.loginAltBox.Location = new System.Drawing.Point(91, 205);
             this.loginAltBox.Name = "loginAltBox";
             this.loginAltBox.Size = new System.Drawing.Size(121, 21);

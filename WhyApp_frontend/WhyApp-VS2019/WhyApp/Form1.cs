@@ -40,7 +40,7 @@ namespace WhyApp
             dataGridView1.DataSource = dt;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = (e.RowIndex);
             
@@ -51,6 +51,7 @@ namespace WhyApp
             string roomName = Convert.ToString(dataGridView1.Rows[index].Cells[1].Value);
 
             ChatForm ch = new ChatForm(domainName, roomID, roomName, userID);
+            int i = await ch.testChat();
             ch.Show();
         }
     }
