@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -153,6 +153,12 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="gridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gridForm.Designer.cs">
+      <DependentUpon>gridForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageChatBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,6 +170,12 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModeratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModeratorForm.Designer.cs">
+      <DependentUpon>ModeratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,11 +200,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gridForm.resx">
+      <DependentUpon>gridForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageChatBubble.resx">
       <DependentUpon>ImageChatBubble.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModeratorForm.resx">
+      <DependentUpon>ModeratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

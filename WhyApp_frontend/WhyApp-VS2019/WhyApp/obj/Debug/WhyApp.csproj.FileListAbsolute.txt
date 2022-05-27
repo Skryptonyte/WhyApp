@@ -112,3 +112,5 @@ C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Deb
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ImageChatBubble.resources
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.exe.manifest
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.application
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ModeratorForm.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.gridForm.resources

@@ -36,6 +36,7 @@
             this.registerButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.loginAltBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // usernameBox
@@ -73,7 +74,7 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(137, 226);
+            this.loginButton.Location = new System.Drawing.Point(197, 242);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(75, 23);
             this.loginButton.TabIndex = 4;
@@ -83,7 +84,7 @@
             // 
             // registerButton
             // 
-            this.registerButton.Location = new System.Drawing.Point(37, 226);
+            this.registerButton.Location = new System.Drawing.Point(112, 242);
             this.registerButton.Name = "registerButton";
             this.registerButton.Size = new System.Drawing.Size(75, 23);
             this.registerButton.TabIndex = 5;
@@ -109,11 +110,24 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Domain: ";
             // 
+            // loginAltBox
+            // 
+            this.loginAltBox.FormattingEnabled = true;
+            this.loginAltBox.Items.AddRange(new object[] {
+            "User",
+            "Moderator"});
+            this.loginAltBox.Location = new System.Drawing.Point(91, 205);
+            this.loginAltBox.Name = "loginAltBox";
+            this.loginAltBox.Size = new System.Drawing.Size(121, 21);
+            this.loginAltBox.TabIndex = 8;
+            // 
             // LoginForm
             // 
+            this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 277);
+            this.Controls.Add(this.loginAltBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.registerButton);
@@ -139,5 +153,6 @@
         private System.Windows.Forms.Button registerButton;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox loginAltBox;
     }
 }

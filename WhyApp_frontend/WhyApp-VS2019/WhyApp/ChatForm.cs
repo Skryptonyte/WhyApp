@@ -26,7 +26,6 @@ namespace WhyApp
         SocketIO client;
         string domainName;
         string attachedFile = "";
-        int loadedAttachID;
         public ChatForm(string domainName, int chatroomID, string roomName, int userID)
         {
             InitializeComponent();

@@ -17,13 +17,18 @@ namespace WhyApp
         public LoginForm()
         {
             InitializeComponent();
+            loginAltBox.SelectedIndex = 0;
         }
 
-        async Task<int> loginRequest(string username, string password)
+        async Task<int> loginRequest(string username, string password, int mode=0)
         {
             HttpClient hc = new HttpClient();
-            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}/api/login?username={username}&password={password}");
-
+            HttpResponseMessage response;
+            
+            if (mode==1)
+                response = await hc.GetAsync($"http://{domainName}/api/moderator/login?username={username}&password={password}");
+            else
+                response = await hc.GetAsync($"http://{domainName}/api/login?username={username}&password={password}");
             response.EnsureSuccessStatusCode();
 
             HttpContent content = response.Content;
@@ -37,30 +42,57 @@ namespace WhyApp
         }
         private async void loginButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(usernameBox.Text) || string.IsNullOrEmpty(passBox.Text))
+
+                if (string.IsNullOrEmpty(usernameBox.Text) || string.IsNullOrEmpty(passBox.Text))
+                {
+                    MessageBox.Show("Both username and password are mandatory", "Notice");
+                    return;
+                }
+                int userID = -1;
+            if (loginAltBox.SelectedIndex == 0)
             {
-                MessageBox.Show("Both username and password are mandatory", "Notice");
-                return;
+                try
+                {
+                    userID = await loginRequest(usernameBox.Text, passBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show($"Unable to connect to domain {domainName}", "Error");
+                    return;
+                }
+                if (userID >= 0)
+                {
+                    RoomForm rf = new RoomForm(domainName, userID);
+                    rf.Show();
+                }
+                else if (userID == -1)
+                {
+                    MessageBox.Show("Incorrect username/password!", "Auth Failed");
+                }
             }
-            int userID = -1;
-            try
+
+            else if (loginAltBox.SelectedIndex == 1)
             {
-                userID = await loginRequest(usernameBox.Text, passBox.Text);
+                try
+                {
+                    userID = await loginRequest(usernameBox.Text, passBox.Text,1);
+                }
+                catch
+                {
+                    MessageBox.Show($"Unable to connect to domain {domainName}", "Error");
+                    return;
+                }
+                if (userID >= 0)
+                {
+                    ModeratorForm mf = new ModeratorForm(domainName);
+                    mf.Show();
+                }
+                else if (userID == -1)
+                {
+                    MessageBox.Show("Incorrect username/password!", "Auth Failed");
+                }
             }
-            catch
-            {
-                MessageBox.Show($"Unable to connect to domain {domainName}", "Error");
-                return;
-            }
-            if (userID >= 0)
-            {
-                RoomForm rf = new RoomForm(domainName, userID);
-                rf.Show();
-            }
-            else if(userID == -1)
-            {
-                MessageBox.Show("Incorrect username/password!","Auth Failed");
-            }
+
         }
 
         private void registerButton_Click(object sender, EventArgs e)

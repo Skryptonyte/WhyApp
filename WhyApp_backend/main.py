@@ -11,7 +11,11 @@ conn = cx_Oracle.connect(user=sys.argv[1],password=sys.argv[2],events=True)
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
+########################
+#### Authentication ####
+########################
 
+# Authenticate regular user
 @app.route('/api/login',methods=['GET'])
 def validateLogin():
     username=request.args.get("username")
@@ -25,6 +29,109 @@ def validateLogin():
         return str(result[0])
     else:
         return "-1"
+
+# Authenticate moderator
+@app.route('/api/moderator/login',methods=['GET'])
+def validateModLogin():
+    username=request.args.get("username")
+    password=request.args.get("password")
+    print(type(username), password)
+    cursor = conn.cursor()
+    cursor.execute("select m_id from moderators where username = :1 and password=ora_hash( :2 )",(username, password))
+    
+    result = cursor.fetchone()
+    if (cursor.rowcount > 0):
+        return str(result[0])
+    else:
+        return "-1"
+
+# Register regular user
+@app.route("/api/register", methods=['POST'])
+def registerUser():
+    cursor = conn.cursor()
+    request_json = request.get_json()
+    username = request_json.get('username')
+    password = request_json.get('password')
+
+
+    try:
+        cursor.execute("insert into chatUser values(NULL, :username, ora_hash(:password), NULL, NULL)",(username, password))
+        conn.commit()
+        print(username,"is created")
+    except Exception as e:
+        print(e)
+        print("Failed to create user.")
+        return "0"
+    
+    return "1"
+
+#############################
+#### Privileged Requests ####
+#############################
+
+# Ban user id in specific room id
+
+@app.route("/api/users/ban", methods=['POST'])
+def banUser():
+
+    json = request.get_json();
+    try:
+        user_id = json['user_id']
+        room_id = json['room_id']
+
+        hrs = json['hour']
+        mins = json['minute']
+
+        reason = json["ban_reason"]
+
+        print(reason)
+        cursor = conn.cursor()
+        cursor.execute(f"""
+        insert into bans values(:user_id, :room_id, current_timestamp, current_timestamp + interval '{hrs}' hour + interval '{mins}' minute, :reason )
+        """, (user_id, room_id, reason))
+
+        conn.commit()
+        print("Banning ",user_id)
+    except Exception as e:
+        print(e)
+        return str(e)
+    return f"Ban applied to {user_id}"
+
+# Unban specific user id from room id
+@app.route("/api/users/unban", methods=['POST'])
+def unbanUser():
+    json = request.get_json();
+    try:
+        user_id = json['user_id']
+        room_id = json['room_id']
+
+        cursor = conn.cursor()
+        cursor.execute(f"""
+        delete from bans where user_id=:user_id and room_id=:room_id
+        """, (user_id, room_id))
+
+        conn.commit()
+        print("Unbanning ",user_id)
+    except Exception as e:
+        print(e)
+        return str(e)
+    return f"Unban applied to {user_id}"
+    pass
+
+########################
+#### Data Retrieval ####
+########################
+
+@app.route('/api/users',methods=['GET'])
+def getUsers():
+    cursor = conn.cursor()
+
+    userRows = []
+    for row in cursor.execute("select user_id, username, joindate from chatuser"):
+        userRows.append({'user_id':row[0], 'username': row[1], 'joindate': row[2]})
+
+    return jsonify(userRows)
+
 @app.route('/api/rooms',methods=['GET'])
 def getRooms():
     cursor = conn.cursor()
@@ -56,24 +163,9 @@ def getPosts(room_id):
 
     return jsonify(postRows)
 
-@app.route("/api/register", methods=['POST'])
-def registerUser():
-    cursor = conn.cursor()
-    request_json = request.get_json()
-    username = request_json.get('username')
-    password = request_json.get('password')
-
-
-    try:
-        cursor.execute("insert into chatUser values(NULL, :username, ora_hash(:password), NULL)",(username, password))
-        conn.commit()
-        print(username,"is created")
-    except Exception as e:
-        print(e)
-        print("Failed to create user.")
-        return "0"
-    
-    return "1"
+#########################################
+#### Upload and Download Attachments ####
+#########################################
 
 @app.route("/api/upload", methods=['POST'])
 def uploadAttachment():
@@ -142,8 +234,29 @@ def downloadAttachment(attach_id):
 
         return "Stream failed"
 
+############################
+#### Socket IO Requests ####
+############################
+
 uid_to_sid = {}
 sid_to_uid = {}
+
+@socketio.on('disconnect')
+def connect():
+    sid = request.sid
+
+    if (not sid_to_uid.get(sid,None)):
+        print("Unidentified client disconnected")
+        return
+    uid = sid_to_uid[sid]
+    print("UID "+str(uid)+" has disconnected")
+
+    uid_to_sid.pop(uid)
+    sid_to_uid.pop(sid)
+
+# Assign room (chat room) to new client which sends join chat.
+# Reject client if its entry is already present in the above hashtables (already joined a room) or it is banned from a particular room
+
 @socketio.on("joinChat")
 def joinRoom(json_str):
     jsonDict = json.loads(json_str)
@@ -179,19 +292,8 @@ def joinRoom(json_str):
     join_room(room_id)
     print("UID",user_id, "has joined the room ID",room_id)
 
-@socketio.on('disconnect')
-def connect():
-    sid = request.sid
 
-    if (not sid_to_uid.get(sid,None)):
-        print("Unidentified client disconnected")
-        return
-    uid = sid_to_uid[sid]
-    print("UID "+str(uid)+" has disconnected")
-
-    uid_to_sid.pop(uid)
-    sid_to_uid.pop(sid)
-
+# Recieve post from client, store in database broadcast to everyone else in the room
 @socketio.on("postChat")
 def postChat(json_str):
     cursor = conn.cursor()
