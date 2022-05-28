@@ -86,7 +86,7 @@ namespace WhyApp
                 }
                 if (userID >= 0)
                 {
-                    ModeratorForm mf = new ModeratorForm(domainName);
+                    ModeratorForm mf = new ModeratorForm(domainName, userID);
                     mf.Show();
                 }
                 else if (userID == -1)

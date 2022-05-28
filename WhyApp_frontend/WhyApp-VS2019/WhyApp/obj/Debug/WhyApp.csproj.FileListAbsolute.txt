@@ -115,3 +115,4 @@ C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Deb
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ModeratorForm.resources
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.gridForm.resources
 C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.AdminForm.resources
+C:\Users\rayha\Documents\Git\WhyApp\WhyApp_frontend\WhyApp-VS2019\WhyApp\obj\Debug\WhyApp.ModContentForm.resources

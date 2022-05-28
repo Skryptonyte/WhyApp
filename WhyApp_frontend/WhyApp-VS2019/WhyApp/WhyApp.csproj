@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -183,6 +183,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModContentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModContentForm.Designer.cs">
+      <DependentUpon>ModContentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModeratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModContentForm.resx">
+      <DependentUpon>ModContentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModeratorForm.resx">
       <DependentUpon>ModeratorForm.cs</DependentUpon>

@@ -4,7 +4,7 @@ import json
 import cx_Oracle
 import sys
 import filetype
-
+import traceback
 
 import uuid
 conn = cx_Oracle.connect(user=sys.argv[1],password=sys.argv[2],events=True)
@@ -85,11 +85,13 @@ def registerUser():
 @app.route("/api/users/ban", methods=['POST'])
 def banUser():
 
-    json = request.get_json();
+    json = request.get_json()
     try:
         user_id = json['user_id']
         room_id = json['room_id']
+        mod_id = json['m_id']
 
+        print("Moderation taking action", mod_id)
         hrs = json['hour']
         mins = json['minute']
 
@@ -97,6 +99,8 @@ def banUser():
 
         print(reason)
         cursor = conn.cursor()
+        cursor.execute("call verifyPerms(:modid, :room_id,1,0,0)", (int(mod_id), int(room_id)))
+
         cursor.execute(f"""
         insert into bans values(:user_id, :room_id, current_timestamp, current_timestamp + interval '{hrs}' hour + interval '{mins}' minute, :reason )
         """, (user_id, room_id, reason))
@@ -115,8 +119,11 @@ def unbanUser():
     try:
         user_id = json['user_id']
         room_id = json['room_id']
+        mod_id = json['m_id']
 
         cursor = conn.cursor()
+        
+        cursor.execute("call verifyPerms(:modid, :room_id,1,0,0)", (int(mod_id), int(room_id)))
         cursor.execute(f"""
         delete from bans where user_id=:user_id and room_id=:room_id
         """, (user_id, room_id))
@@ -164,6 +171,39 @@ def deleteRoom():
         print(e)
         return str(e)
 
+@app.route("/api/posts/delete", methods=['POST'])
+def deletePost():
+    json = request.get_json()
+    m_id = json['m_id']
+    post_id = json['post_id']
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            call deletePost(:mid, :postid)
+        """, (m_id, post_id))
+        conn.commit()
+        return f"Post {post_id} has been deleted"
+    except Exception as e:
+        print(e)
+        return str(e)
+
+@app.route("/api/posts/modify", methods=['POST'])
+def modifyPost():
+    json = request.get_json()
+    m_id = json['m_id']
+    post_id = json['post_id']
+    content = json['new_content']
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            call modifyPost(:m_id, :post_id,:content)
+        """,(m_id, post_id, content))
+        conn.commit()
+        return f"Post {post_id} has been modified"
+    except Exception as e:
+        print(e)
+        return str(e)
+
 @app.route("/api/posts/deleteAll", methods=['DELETE'])
 def purgePost():
     try:
@@ -185,6 +225,62 @@ def getModerators():
         userRows.append({'m_id':row[0], 'username': row[1]})
 
     return jsonify(userRows)
+
+@app.route("/api/moderators/permit", methods=['POST'])
+def permitMod():
+    json = request.get_json()
+    cursor = conn.cursor()
+
+    m_id = json["mod_id"]
+    room_id = json["room_id"]
+
+    banPerm = json["banPerm"]
+    modPerm = json["modifyPerm"]
+    delPerm = json["deletePerm"]
+
+    try:
+        cursor.execute("insert into mod_perms values(:mid,:roomid, :banperm, :modperm, :delperm)",(m_id, room_id, banPerm, modPerm, delPerm))
+        conn.commit()
+        return f"Permissions applied to {m_id} on {room_id} (Ban: {banPerm}, modPerm: {modPerm}, delPerm: {delPerm})"
+    except Exception as e:
+        print(e)
+        return str(e)
+
+@app.route("/api/moderators/revoke", methods=['POST'])
+def revokeMod():
+    json = request.get_json()
+    cursor = conn.cursor()
+
+    m_id = json["mod_id"]
+    room_id = json["room_id"]
+
+    try:
+        cursor.execute("delete from mod_perms where m_id = :mid and room_id = :roomid",(m_id, room_id))
+        conn.commit()
+        return f"Revoked permissions to room {room_id}"
+    except Exception as e:
+        print(e)
+        return str(e)
+
+@app.route('/api/moderators/register',methods=['POST'])
+def registerModerators():
+    cursor = conn.cursor()
+    request_json = request.get_json()
+    username = request_json.get('username')
+    password = request_json.get('password')
+
+
+    try:
+        cursor.execute("insert into moderators values(NULL, :username, ora_hash(:password), NULL)",(username, password))
+        conn.commit()
+        print("New moderator ",username," is created")
+    except Exception as e:
+        print(e)
+        print("Failed to create moderator.")
+        return "0"
+    
+    return "1"
+
 ########################
 #### Data Retrieval ####
 ########################
@@ -414,6 +510,7 @@ def postChat(json_str):
 
     except Exception as e:
         print(e)
+        print(traceback.format_exc())
         print("Failed to create post.")
         emit("failedPost")
     

@@ -42,8 +42,22 @@ namespace WhyApp
             this.listRoomButton = new System.Windows.Forms.Button();
             this.purgePostButton = new System.Windows.Forms.Button();
             this.listModButton = new System.Windows.Forms.Button();
+            this.modButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.modBox = new System.Windows.Forms.CheckBox();
+            this.delBox = new System.Windows.Forms.CheckBox();
+            this.banBox = new System.Windows.Forms.CheckBox();
+            this.roomPermitButton = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.permitButton = new System.Windows.Forms.Button();
+            this.modIDPermitButton = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.revokeButton = new System.Windows.Forms.Button();
             this.addRoom.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.roomPermitButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modIDPermitButton)).BeginInit();
             this.SuspendLayout();
             // 
             // addRoom
@@ -153,7 +167,7 @@ namespace WhyApp
             // purgePostButton
             // 
             this.purgePostButton.ForeColor = System.Drawing.Color.Red;
-            this.purgePostButton.Location = new System.Drawing.Point(12, 236);
+            this.purgePostButton.Location = new System.Drawing.Point(12, 511);
             this.purgePostButton.Name = "purgePostButton";
             this.purgePostButton.Size = new System.Drawing.Size(552, 23);
             this.purgePostButton.TabIndex = 7;
@@ -171,11 +185,123 @@ namespace WhyApp
             this.listModButton.UseVisualStyleBackColor = true;
             this.listModButton.Click += new System.EventHandler(this.listModButton_Click);
             // 
+            // modButton
+            // 
+            this.modButton.Location = new System.Drawing.Point(6, 19);
+            this.modButton.Name = "modButton";
+            this.modButton.Size = new System.Drawing.Size(552, 23);
+            this.modButton.TabIndex = 9;
+            this.modButton.Text = "Moderator Sign-up";
+            this.modButton.UseVisualStyleBackColor = true;
+            this.modButton.Click += new System.EventHandler(this.modButton_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.revokeButton);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.modIDPermitButton);
+            this.groupBox2.Controls.Add(this.permitButton);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.roomPermitButton);
+            this.groupBox2.Controls.Add(this.banBox);
+            this.groupBox2.Controls.Add(this.delBox);
+            this.groupBox2.Controls.Add(this.modBox);
+            this.groupBox2.Controls.Add(this.modButton);
+            this.groupBox2.Location = new System.Drawing.Point(12, 259);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(552, 185);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Moderator Management";
+            // 
+            // modBox
+            // 
+            this.modBox.AutoSize = true;
+            this.modBox.Location = new System.Drawing.Point(242, 104);
+            this.modBox.Name = "modBox";
+            this.modBox.Size = new System.Drawing.Size(57, 17);
+            this.modBox.TabIndex = 10;
+            this.modBox.Text = "Modify";
+            this.modBox.UseVisualStyleBackColor = true;
+            // 
+            // delBox
+            // 
+            this.delBox.AutoSize = true;
+            this.delBox.Location = new System.Drawing.Point(305, 104);
+            this.delBox.Name = "delBox";
+            this.delBox.Size = new System.Drawing.Size(57, 17);
+            this.delBox.TabIndex = 11;
+            this.delBox.Text = "Delete";
+            this.delBox.UseVisualStyleBackColor = true;
+            // 
+            // banBox
+            // 
+            this.banBox.AutoSize = true;
+            this.banBox.Location = new System.Drawing.Point(368, 104);
+            this.banBox.Name = "banBox";
+            this.banBox.Size = new System.Drawing.Size(45, 17);
+            this.banBox.TabIndex = 12;
+            this.banBox.Text = "Ban";
+            this.banBox.UseVisualStyleBackColor = true;
+            // 
+            // roomPermitButton
+            // 
+            this.roomPermitButton.Location = new System.Drawing.Point(103, 81);
+            this.roomPermitButton.Name = "roomPermitButton";
+            this.roomPermitButton.Size = new System.Drawing.Size(120, 20);
+            this.roomPermitButton.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(39, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Room ID";
+            // 
+            // permitButton
+            // 
+            this.permitButton.Location = new System.Drawing.Point(415, 81);
+            this.permitButton.Name = "permitButton";
+            this.permitButton.Size = new System.Drawing.Size(75, 23);
+            this.permitButton.TabIndex = 15;
+            this.permitButton.Text = "Permit";
+            this.permitButton.UseVisualStyleBackColor = true;
+            this.permitButton.Click += new System.EventHandler(this.permitButton_Click);
+            // 
+            // modIDPermitButton
+            // 
+            this.modIDPermitButton.Location = new System.Drawing.Point(103, 107);
+            this.modIDPermitButton.Name = "modIDPermitButton";
+            this.modIDPermitButton.Size = new System.Drawing.Size(120, 20);
+            this.modIDPermitButton.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(42, 113);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Mod ID: ";
+            // 
+            // revokeButton
+            // 
+            this.revokeButton.Location = new System.Drawing.Point(415, 104);
+            this.revokeButton.Name = "revokeButton";
+            this.revokeButton.Size = new System.Drawing.Size(75, 23);
+            this.revokeButton.TabIndex = 18;
+            this.revokeButton.Text = "Revoke";
+            this.revokeButton.UseVisualStyleBackColor = true;
+            this.revokeButton.Click += new System.EventHandler(this.revokeButton_Click);
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 450);
+            this.ClientSize = new System.Drawing.Size(596, 546);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.listModButton);
             this.Controls.Add(this.purgePostButton);
             this.Controls.Add(this.listRoomButton);
@@ -187,6 +313,10 @@ namespace WhyApp
             this.addRoom.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.roomPermitButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modIDPermitButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -206,5 +336,16 @@ namespace WhyApp
         private System.Windows.Forms.Button listRoomButton;
         private System.Windows.Forms.Button purgePostButton;
         private System.Windows.Forms.Button listModButton;
+        private System.Windows.Forms.Button modButton;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown roomPermitButton;
+        private System.Windows.Forms.CheckBox banBox;
+        private System.Windows.Forms.CheckBox delBox;
+        private System.Windows.Forms.CheckBox modBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown modIDPermitButton;
+        private System.Windows.Forms.Button permitButton;
+        private System.Windows.Forms.Button revokeButton;
     }
 }

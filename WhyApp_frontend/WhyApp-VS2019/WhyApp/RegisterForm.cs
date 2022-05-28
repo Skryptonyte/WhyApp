@@ -16,8 +16,10 @@ namespace WhyApp
     public partial class RegisterForm : Form
     {
         string domainName;
-        public RegisterForm(string domainName)
+        int mode = 0;
+        public RegisterForm(string domainName, int mode = 0)
         {
+            this.mode = mode;
             this.domainName = domainName;
             InitializeComponent();
         }
@@ -33,8 +35,11 @@ namespace WhyApp
             var stringContent = new System.Net.Http.StringContent(JsonConvert.SerializeObject(registrationDict), Encoding.UTF8, "application/json");
             stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpClient hc = new HttpClient();
-            HttpResponseMessage response = await hc.PostAsync($"http://{domainName}/api/register", stringContent);
-
+            HttpResponseMessage response;
+            if (mode == 1)
+                response = await hc.PostAsync($"http://{domainName}/api/moderators/register", stringContent);
+            else
+                response = await hc.PostAsync($"http://{domainName}/api/register", stringContent);
             response.EnsureSuccessStatusCode();
 
             HttpContent resultString = response.Content;

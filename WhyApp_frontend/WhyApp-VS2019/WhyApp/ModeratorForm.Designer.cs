@@ -29,7 +29,6 @@ namespace WhyApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.reasonTB = new System.Windows.Forms.TextBox();
@@ -43,20 +42,17 @@ namespace WhyApp
             this.label1 = new System.Windows.Forms.Label();
             this.banUserTextbos = new System.Windows.Forms.TextBox();
             this.displayUserButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.delPostButton = new System.Windows.Forms.Button();
+            this.modPostButton = new System.Windows.Forms.Button();
+            this.postManageBox = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roomIDBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hourBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minuteBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(12, 338);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(393, 100);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Post Deletion";
             // 
             // groupBox2
             // 
@@ -186,7 +182,7 @@ namespace WhyApp
             // 
             // displayUserButton
             // 
-            this.displayUserButton.Location = new System.Drawing.Point(479, 34);
+            this.displayUserButton.Location = new System.Drawing.Point(432, 13);
             this.displayUserButton.Name = "displayUserButton";
             this.displayUserButton.Size = new System.Drawing.Size(289, 23);
             this.displayUserButton.TabIndex = 2;
@@ -194,14 +190,63 @@ namespace WhyApp
             this.displayUserButton.UseVisualStyleBackColor = true;
             this.displayUserButton.Click += new System.EventHandler(this.displayUserButton_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.postManageBox);
+            this.groupBox1.Controls.Add(this.modPostButton);
+            this.groupBox1.Controls.Add(this.delPostButton);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Location = new System.Drawing.Point(13, 161);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(775, 277);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Post Management";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Post ID:";
+            // 
+            // delPostButton
+            // 
+            this.delPostButton.Location = new System.Drawing.Point(15, 64);
+            this.delPostButton.Name = "delPostButton";
+            this.delPostButton.Size = new System.Drawing.Size(75, 23);
+            this.delPostButton.TabIndex = 2;
+            this.delPostButton.Text = "Delete Post";
+            this.delPostButton.UseVisualStyleBackColor = true;
+            this.delPostButton.Click += new System.EventHandler(this.delPostButton_Click);
+            // 
+            // modPostButton
+            // 
+            this.modPostButton.Location = new System.Drawing.Point(137, 64);
+            this.modPostButton.Name = "modPostButton";
+            this.modPostButton.Size = new System.Drawing.Size(75, 23);
+            this.modPostButton.TabIndex = 3;
+            this.modPostButton.Text = "Modify Post";
+            this.modPostButton.UseVisualStyleBackColor = true;
+            this.modPostButton.Click += new System.EventHandler(this.modPostButton_Click);
+            // 
+            // postManageBox
+            // 
+            this.postManageBox.Location = new System.Drawing.Point(74, 35);
+            this.postManageBox.Name = "postManageBox";
+            this.postManageBox.Size = new System.Drawing.Size(100, 20);
+            this.postManageBox.TabIndex = 4;
+            // 
             // ModeratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.displayUserButton);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "ModeratorForm";
             this.Text = "ModeratorForm";
             this.groupBox2.ResumeLayout(false);
@@ -209,13 +254,13 @@ namespace WhyApp
             ((System.ComponentModel.ISupportInitialize)(this.roomIDBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hourBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minuteBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button unbanButton;
         private System.Windows.Forms.Button banButton;
@@ -229,5 +274,10 @@ namespace WhyApp
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox reasonTB;
         private System.Windows.Forms.Button displayUserButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button modPostButton;
+        private System.Windows.Forms.Button delPostButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox postManageBox;
     }
 }

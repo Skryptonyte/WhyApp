@@ -16,10 +16,12 @@ namespace WhyApp
     public partial class ModeratorForm : Form
     {
         string domainName;
-        public ModeratorForm(string domainName)
+        int modid;
+        public ModeratorForm(string domainName, int modid)
         {
             InitializeComponent();
             this.domainName = domainName;
+            this.modid = modid;
         }
 
         private async void ban_Click(object sender, EventArgs e)
@@ -32,7 +34,9 @@ namespace WhyApp
 
         
             var banReq = new Dictionary<String, String>
-            { {"user_id", banUserTextbos.Text },
+            {
+                {"m_id", this.modid.ToString() }   ,
+                {"user_id", banUserTextbos.Text },
                 {"ban_reason", reasonTB.Text },
                 {"room_id", roomIDBox.Value.ToString() },
                 {"minute", minuteBox.Value.ToString() },
@@ -90,6 +94,35 @@ namespace WhyApp
             gridForm gf = new gridForm(dt);
             gf.Show();
 
+        }
+
+        private async void delPostButton_Click(object sender, EventArgs e)
+        {
+            var deletePostReq = new Dictionary<String, String>
+            { {"m_id",  this.modid.ToString()},
+                {"post_id", postManageBox.Text.ToString() }
+            };
+
+            var stringContent = new System.Net.Http.StringContent(JsonConvert.SerializeObject(deletePostReq), Encoding.UTF8, "application/json");
+
+            stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpClient hc = new HttpClient();
+            HttpResponseMessage response = await hc.PostAsync($"http://{domainName}/api/posts/delete", stringContent);
+
+
+            response.EnsureSuccessStatusCode();
+
+            HttpContent content = response.Content;
+            string rawstr = await content.ReadAsStringAsync();
+
+            MessageBox.Show(rawstr, "Info");
+        }
+
+        private void modPostButton_Click(object sender, EventArgs e)
+        {
+            ModContentForm mcf = new ModContentForm(domainName, postManageBox.Text, modid);
+            mcf.Show();
         }
     }
 }

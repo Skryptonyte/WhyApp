@@ -56,12 +56,6 @@ namespace WhyApp
 
         private async void deleteButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.deleteRoomIDBox.Text))
-            {
-                MessageBox.Show("Please enter Room Description.", "Notice");
-                return;
-            }
-
 
             var banReq = new Dictionary<String, String>
             { {"room_id", deleteRoomIDBox.Text },            };
@@ -116,6 +110,56 @@ namespace WhyApp
 
             gridForm gf = new gridForm(dt);
             gf.Show();
+        }
+
+        private void modButton_Click(object sender, EventArgs e)
+        {
+            RegisterForm rf = new RegisterForm(domainName, 1);
+            rf.Show();
+        }
+
+        private async void permitButton_Click(object sender, EventArgs e)
+        {
+
+            var banReq = new Dictionary<String, String>
+            { {"room_id", roomPermitButton.Value.ToString() },
+                {"mod_id",  modIDPermitButton.Value.ToString() },
+                { "modifyPerm",  (delBox.Checked ? 1: 0).ToString() },
+                { "deletePerm",  (modBox.Checked ? 1: 0).ToString() },
+                { "banPerm",  (banBox.Checked? 1: 0).ToString() }
+                
+            };
+
+            var stringContent = new System.Net.Http.StringContent(JsonConvert.SerializeObject(banReq), Encoding.UTF8, "application/json");
+
+            stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpClient hc = new HttpClient();
+            HttpResponseMessage resp = await hc.PostAsync($"http://{domainName}/api/moderators/permit", stringContent);
+
+            resp.EnsureSuccessStatusCode();
+
+            string responseText = await resp.Content.ReadAsStringAsync();
+            MessageBox.Show(responseText, "Info");
+        }
+
+        private async void revokeButton_Click(object sender, EventArgs e)
+        {
+            var banReq = new Dictionary<String, String>
+            { {"room_id", roomPermitButton.Value.ToString() },
+                {"mod_id",  modIDPermitButton.Value.ToString() },
+
+            };
+
+            var stringContent = new System.Net.Http.StringContent(JsonConvert.SerializeObject(banReq), Encoding.UTF8, "application/json");
+
+            stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpClient hc = new HttpClient();
+            HttpResponseMessage resp = await hc.PostAsync($"http://{domainName}/api/moderators/revoke", stringContent);
+
+            resp.EnsureSuccessStatusCode();
+
+            string responseText = await resp.Content.ReadAsStringAsync();
+            MessageBox.Show(responseText, "Info");
         }
     }
 }
