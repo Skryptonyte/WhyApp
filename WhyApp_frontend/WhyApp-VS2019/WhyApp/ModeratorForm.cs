@@ -124,5 +124,20 @@ namespace WhyApp
             ModContentForm mcf = new ModContentForm(domainName, postManageBox.Text, modid);
             mcf.Show();
         }
+
+        private async void displayPostButton_Click(object sender, EventArgs e)
+        {
+            HttpClient hc = new HttpClient();
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}/api/posts");
+
+            response.EnsureSuccessStatusCode();
+
+            HttpContent content = response.Content;
+            string rawstr = await content.ReadAsStringAsync();
+            DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(rawstr);
+
+            gridForm gf = new gridForm(dt);
+            gf.Show();
+        }
     }
 }

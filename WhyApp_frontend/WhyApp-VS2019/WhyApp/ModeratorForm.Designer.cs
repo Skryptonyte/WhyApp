@@ -47,7 +47,7 @@ namespace WhyApp
             this.modPostButton = new System.Windows.Forms.Button();
             this.delPostButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.displayPostButton = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roomIDBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hourBox)).BeginInit();
@@ -193,7 +193,7 @@ namespace WhyApp
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.displayPostButton);
             this.groupBox1.Controls.Add(this.postManageBox);
             this.groupBox1.Controls.Add(this.displayUserButton);
             this.groupBox1.Controls.Add(this.modPostButton);
@@ -242,14 +242,15 @@ namespace WhyApp
             this.label5.TabIndex = 1;
             this.label5.Text = "Post ID:";
             // 
-            // button1
+            // displayPostButton
             // 
-            this.button1.Location = new System.Drawing.Point(21, 219);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(289, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Display Posts";
-            this.button1.UseVisualStyleBackColor = true;
+            this.displayPostButton.Location = new System.Drawing.Point(21, 219);
+            this.displayPostButton.Name = "displayPostButton";
+            this.displayPostButton.Size = new System.Drawing.Size(289, 23);
+            this.displayPostButton.TabIndex = 5;
+            this.displayPostButton.Text = "Display Posts";
+            this.displayPostButton.UseVisualStyleBackColor = true;
+            this.displayPostButton.Click += new System.EventHandler(this.displayPostButton_Click);
             // 
             // ModeratorForm
             // 
@@ -290,6 +291,6 @@ namespace WhyApp
         private System.Windows.Forms.Button delPostButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox postManageBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button displayPostButton;
     }
 }

@@ -124,8 +124,8 @@ namespace WhyApp
             var banReq = new Dictionary<String, String>
             { {"room_id", roomPermitButton.Value.ToString() },
                 {"mod_id",  modIDPermitButton.Value.ToString() },
-                { "modifyPerm",  (delBox.Checked ? 1: 0).ToString() },
-                { "deletePerm",  (modBox.Checked ? 1: 0).ToString() },
+                { "modifyPerm",  (modBox.Checked ? 1: 0).ToString() },
+                { "deletePerm",  (delBox.Checked ? 1: 0).ToString() },
                 { "banPerm",  (banBox.Checked? 1: 0).ToString() }
                 
             };
