@@ -242,5 +242,24 @@ namespace WhyApp
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void fetchButton_Click(object sender, EventArgs e)
+        {
+            HttpClient hc = new HttpClient();
+            HttpResponseMessage response = await hc.GetAsync($"http://{domainName}/api/posts/{chatroomID}/posted");
+
+            response.EnsureSuccessStatusCode();
+
+            HttpContent content = response.Content;
+            string rawstr = await content.ReadAsStringAsync();
+            DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(rawstr);
+
+
+            this.dataGridView1.DataSource = dt;
+        }
     }
 }

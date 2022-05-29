@@ -51,6 +51,7 @@
             this.passBox.Name = "passBox";
             this.passBox.Size = new System.Drawing.Size(100, 20);
             this.passBox.TabIndex = 1;
+            this.passBox.UseSystemPasswordChar = true;
             // 
             // confirmPassBox
             // 
@@ -58,6 +59,7 @@
             this.confirmPassBox.Name = "confirmPassBox";
             this.confirmPassBox.Size = new System.Drawing.Size(100, 20);
             this.confirmPassBox.TabIndex = 2;
+            this.confirmPassBox.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -109,7 +111,7 @@
             this.Controls.Add(this.passBox);
             this.Controls.Add(this.userBox);
             this.Name = "RegisterForm";
-            this.Text = "RegisterForm";
+            this.Text = "Register";
             this.ResumeLayout(false);
             this.PerformLayout();
 

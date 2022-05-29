@@ -22,7 +22,7 @@ ADMIN_PASSWORD="admin"
 def validateLogin():
     username=request.args.get("username")
     password=request.args.get("password")
-    print(type(username), password)
+    print(username, password)
     cursor = conn.cursor()
     cursor.execute("select user_id from chatUser where username = :1 and password=ora_hash( :2 )",(username, password))
     
@@ -64,9 +64,9 @@ def registerUser():
     username = request_json.get('username')
     password = request_json.get('password')
 
-
+    user_id = cursor.var(int, arraysize=1)
     try:
-        cursor.execute("insert into chatUser values(NULL, :username, ora_hash(:password), NULL, NULL)",(username, password))
+        cursor.execute("insert into chatUser values(NULL, :username, :password, NULL, NULL) returning user_id into :userid",(username, password, user_id))
         conn.commit()
         print(username,"is created")
     except Exception as e:
@@ -74,7 +74,7 @@ def registerUser():
         print("Failed to create user.")
         return "0"
     
-    return "1"
+    return str(user_id.values[0][0])
 
 #############################
 #### Privileged Requests ####
@@ -167,6 +167,7 @@ def deleteRoom():
 
         return "Room deleted"
 
+
     except Exception as e:
         print(e)
         return str(e)
@@ -239,7 +240,7 @@ def permitMod():
     delPerm = json["deletePerm"]
 
     try:
-        cursor.execute("insert into mod_perms values(:mid,:roomid, :banperm, :modperm, :delperm)",(m_id, room_id, banPerm, modPerm, delPerm))
+        cursor.execute("insert into mod_perms values(:mid,:roomid, :banperm, :modperm, :delperm)",(m_id, room_id, banPerm, delPerm, modPerm))
         conn.commit()
         return f"Permissions applied to {m_id} on {room_id} (Ban: {banPerm}, modPerm: {modPerm}, delPerm: {delPerm})"
     except Exception as e:
@@ -269,9 +270,8 @@ def registerModerators():
     username = request_json.get('username')
     password = request_json.get('password')
 
-
     try:
-        cursor.execute("insert into moderators values(NULL, :username, ora_hash(:password), NULL)",(username, password))
+        cursor.execute("insert into moderators values(NULL, :username, :password, NULL)",(username, password))
         conn.commit()
         print("New moderator ",username," is created")
     except Exception as e:
@@ -323,6 +323,19 @@ def getPosts(room_id):
             atid = row[4]
             print("Kek: ",atid)
         postRows.append({'post_id':row[0], 'username': row[1], 'content': row[2], 'createDate': row[3], 'attach_id': atid, 'rank_name':row[5], 'rank_color': row[6]})
+
+    return jsonify(postRows)
+
+@app.route('/api/posts/<room_id>/posted',methods=['GET'])
+def getTopPosts(room_id):
+    cursor = conn.cursor()
+    postRows = []
+
+    query = f"""
+        select username, count(*) c from chatuser natural join posts where user_id in (select user_id from posts where room_id = :roomid) group by user_id, username
+    """
+    for row in cursor.execute(query, (room_id)):
+        postRows.append({'username':row[0], 'postcount': row[1]})
 
     return jsonify(postRows)
 
@@ -499,7 +512,6 @@ def postChat(json_str):
         """
 
         jsonBroadcast['attach_id'] = attach_id
-        print("File Path: ",row[4])
         jsonBroadcastStr = (json.dumps(jsonBroadcast))
         jsonBroadcastStr = "[" + jsonBroadcastStr + "]"
         conn.commit()

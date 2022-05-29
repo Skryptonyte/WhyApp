@@ -44,6 +44,13 @@ create table attachments(attachment_id int,
             primary key(attachment_id), 
             foreign key(post_id) references posts on delete cascade);
 
+create table moderators(m_id int, 
+            username varchar(30), 
+            password varchar(30), 
+            joindate date, 
+            primary key(m_id), unique(username));
+
+
 create table bans(user_id int, 
             room_id int, 
             startdate timestamp, 
@@ -52,12 +59,6 @@ create table bans(user_id int,
             primary key(user_id, room_id), 
             foreign key(user_id) references chatuser on delete cascade, 
             foreign key (room_id) references rooms on delete cascade);
-
-create table moderators(m_id int, 
-            username varchar(30), 
-            password varchar(30), 
-            joindate date, 
-            primary key(m_id));
 
 create table mod_perms(
             m_id int,
@@ -70,6 +71,10 @@ create table mod_perms(
             primary key(m_id, room_id));
 
 insert into ranks values(0, 'Novice', 'white', 0);
+insert into ranks values(1, 'Regular', 'blue', 5);
+insert into ranks values(2, 'Patron', 'maroon', 10);
+insert into ranks values(3, 'Adept', 'red', 50);
+insert into ranks values(4, 'Expert', 'purple', 100);
 
 drop sequence userIDGenerator;
 drop sequence modIDGenerator;
@@ -78,29 +83,48 @@ drop sequence postIDGenerator;
 drop sequence roomIDGenerator;
 
 create sequence userIDGenerator INCREMENT BY 1 START WITH 1;
+create sequence modIDGenerator INCREMENT BY 1 START WITH 1;
+create sequence postIDGenerator INCREMENT BY 1 START WITH 1;
+create sequence attachmentIDGenerator INCREMENT BY 1 START WITH 1;
+create sequence roomIDGenerator INCREMENT BY 1 START WITH 1;
 
 create or replace trigger populateUserID
 before insert on chatUser
 for each row
+declare
+hashed_pass varchar(30);
 begin
 select userIDGenerator.nextVal into :new.user_id from dual;
 select sysdate into :new.joindate from dual;
 select 0 into :new.rank_id from dual;
+
+if (length(:new.password) < 7) then
+    raise_application_error(-20002,'Password constraints failed (Length at least 7)');
+end if;
+
+select ora_hash(:new.password) into hashed_pass from dual;
+select hashed_pass into :new.password from dual;
 end;
 /
 
-create sequence modIDGenerator INCREMENT BY 1 START WITH 1;
 
 create or replace trigger populateModID
 before insert on moderators
 for each row
+declare
+hashed_pass varchar(30);
 begin
 select modIDGenerator.nextVal into :new.m_id from dual;
 select sysdate into :new.joindate from dual;
+
+if (length(:new.password) < 10) then
+    raise_application_error(-20002,'Password constraints failed (Length at least 10)');
+end if;
+select ora_hash(:new.password) into hashed_pass from dual;
+select hashed_pass into :new.password from dual;
 end;
 /
 
-create sequence postIDGenerator INCREMENT BY 1 START WITH 1;
 
 create or replace trigger populatePost
 before insert on posts
@@ -126,7 +150,6 @@ end if;
 end;
 /
 
-create sequence attachmentIDGenerator INCREMENT BY 1 START WITH 1;
 
 create or replace trigger populateAttachment
 before insert on attachments
@@ -136,7 +159,6 @@ select attachmentIDGenerator.nextVal into :new.attachment_id from dual;
 end;
 /
 
-create sequence roomIDGenerator INCREMENT BY 1 START WITH 1;
 
 
 create or replace procedure verifyPerms (modid int, roomid int, ban int, del int, mod int)
