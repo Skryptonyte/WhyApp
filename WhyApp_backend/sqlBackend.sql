@@ -175,8 +175,14 @@ end;
 
 create or replace procedure deletePost (modid int, postid int)
 as
+postexist int;
 post_room_id int;
 begin
+    select count(*) into postexist from posts where post_id = postid;
+
+    if (postexist = 0) then
+        raise_application_error(-20003,'Post does not exist');
+    end if;
 
     select room_id into post_room_id from posts where post_id = postid;
     verifyPerms(modid, post_room_id, 0, 1, 0);
@@ -187,7 +193,13 @@ end;
 create or replace procedure modifyPost (modid int, postid int, new_content varchar)
 as
 post_room_id int;
+postexist int;
 begin
+    select count(*) into postexist from posts where post_id = postid;
+
+    if (postexist = 0) then
+        raise_application_error(-20003,'Post does not exist');
+    end if;
 
     select room_id into post_room_id from posts where post_id = postid;
     verifyPerms(modid, post_room_id, 0, 0, 1);

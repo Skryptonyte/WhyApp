@@ -48,6 +48,7 @@ namespace WhyApp
             this.delPostButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.displayPostButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roomIDBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hourBox)).BeginInit();
@@ -57,6 +58,7 @@ namespace WhyApp
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.reasonTB);
             this.groupBox2.Controls.Add(this.roomIDBox);
@@ -252,6 +254,15 @@ namespace WhyApp
             this.displayPostButton.UseVisualStyleBackColor = true;
             this.displayPostButton.Click += new System.EventHandler(this.displayPostButton_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(208, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Room ID";
+            // 
             // ModeratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,5 +303,6 @@ namespace WhyApp
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox postManageBox;
         private System.Windows.Forms.Button displayPostButton;
+        private System.Windows.Forms.Label label6;
     }
 }

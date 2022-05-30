@@ -98,6 +98,11 @@ namespace WhyApp
 
         private async void delPostButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(postManageBox.Text))
+            {
+                MessageBox.Show("Please enter Post ID");
+                return;
+            }
             var deletePostReq = new Dictionary<String, String>
             { {"m_id",  this.modid.ToString()},
                 {"post_id", postManageBox.Text.ToString() }
@@ -121,6 +126,11 @@ namespace WhyApp
 
         private void modPostButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(postManageBox.Text))
+            {
+                MessageBox.Show("Please enter Post ID");
+                return;
+            }
             ModContentForm mcf = new ModContentForm(domainName, postManageBox.Text, modid);
             mcf.Show();
         }
@@ -137,6 +147,12 @@ namespace WhyApp
             DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(rawstr);
 
             gridForm gf = new gridForm(dt);
+            DataGridView dgv = gf.GetGridView();
+
+            dgv.Columns["post_id"].DisplayIndex = 0;
+            dgv.Columns["room_id"].DisplayIndex = 1;
+            dgv.Columns["user_id"].DisplayIndex = 2;
+            dgv.Columns["content"].DisplayIndex = 3;
             gf.Show();
         }
     }

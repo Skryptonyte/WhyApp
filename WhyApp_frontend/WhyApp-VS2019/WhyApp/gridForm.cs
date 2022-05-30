@@ -19,6 +19,10 @@ namespace WhyApp
             this.dataGridView1.DataSource = dt;
         }
 
+        public DataGridView GetGridView()
+        {
+            return this.dataGridView1;
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

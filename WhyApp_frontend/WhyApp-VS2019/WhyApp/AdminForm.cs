@@ -84,6 +84,11 @@ namespace WhyApp
             DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(rawstr);
 
             gridForm gf = new gridForm(dt);
+            DataGridView dgv = gf.GetGridView();
+
+            dgv.Columns["room_id"].DisplayIndex = 0;
+            dgv.Columns["room_name"].DisplayIndex = 1;
+            dgv.Columns["room_desc"].DisplayIndex = 2;
             gf.Show();
 
         }

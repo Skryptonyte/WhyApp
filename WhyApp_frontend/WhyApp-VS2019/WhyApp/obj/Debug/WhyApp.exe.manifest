@@ -246,14 +246,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WhyApp.exe" size="94176">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WhyApp.exe" size="94688">
       <assemblyIdentity name="WhyApp" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>c5wpLKMEVPPsaQC3LF9yeXBvkrvozNkUR4v3707iCzk=</dsig:DigestValue>
+        <dsig:DigestValue>zTQeJYGncRvTcc0NHPU3TejFOwJ0xpZdieQ4uHhzDgY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
