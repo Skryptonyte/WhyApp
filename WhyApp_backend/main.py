@@ -332,6 +332,21 @@ def getRooms():
 
     return jsonify(roomRows)
 
+
+@app.route('/api/posts',methods=['GET'])
+def allPosts():
+    conn = pool.acquire()
+    cursor = conn.cursor()
+
+    postRows = []
+
+    query = "select post_id, room_id, user_id, content from chatuser natural join posts"
+    
+    for row in cursor.execute(query):
+        postRows.append({'post_id':row[0], 'room_id': row[1], 'user_id': row[2], 'content': row[3]})
+
+    return jsonify(postRows)
+
 @app.route('/api/posts/<room_id>',methods=['GET'])
 def getPosts(room_id):
     conn = pool.acquire()
