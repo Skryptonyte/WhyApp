@@ -7,7 +7,15 @@ import filetype
 import traceback
 
 import uuid
-conn = cx_Oracle.connect(user=sys.argv[1],password=sys.argv[2],events=True)
+
+#conn = cx_Oracle.connect(user=sys.argv[1],password=sys.argv[2],events=True)
+
+pool = cx_Oracle.SessionPool(
+    user=sys.argv[1],
+    password=sys.argv[2],
+    increment=1,
+    encoding="UTF-8")
+
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
@@ -20,6 +28,7 @@ ADMIN_PASSWORD="admin"
 # Authenticate regular user
 @app.route('/api/login',methods=['GET'])
 def validateLogin():
+    conn = pool.acquire()
     username=request.args.get("username")
     password=request.args.get("password")
     print(username, password)
@@ -35,6 +44,7 @@ def validateLogin():
 # Authenticate moderator
 @app.route('/api/moderator/login',methods=['GET'])
 def validateModLogin():
+    conn = pool.acquire()
     username=request.args.get("username")
     password=request.args.get("password")
     print(type(username), password)
@@ -49,6 +59,8 @@ def validateModLogin():
 
 @app.route('/api/administrator/login',methods=['GET'])
 def validateAdminLogin():
+    conn = pool.acquire()
+
     username=request.args.get("username")
     password=request.args.get("password")
 
@@ -59,6 +71,8 @@ def validateAdminLogin():
 # Register regular user
 @app.route("/api/register", methods=['POST'])
 def registerUser():
+    conn = pool.acquire()
+
     cursor = conn.cursor()
     request_json = request.get_json()
     username = request_json.get('username')
@@ -84,7 +98,7 @@ def registerUser():
 
 @app.route("/api/users/ban", methods=['POST'])
 def banUser():
-
+    conn = pool.acquire()
     json = request.get_json()
     try:
         user_id = json['user_id']
@@ -115,7 +129,8 @@ def banUser():
 # Unban specific user id from room id
 @app.route("/api/users/unban", methods=['POST'])
 def unbanUser():
-    json = request.get_json();
+    conn = pool.acquire()
+    json = request.get_json()
     try:
         user_id = json['user_id']
         room_id = json['room_id']
@@ -123,7 +138,8 @@ def unbanUser():
 
         cursor = conn.cursor()
         
-        cursor.execute("call verifyPerms(:modid, :room_id,1,0,0)", (int(mod_id), int(room_id)))
+        cursor.execute("call verifyPerms(:m_id, :room_id,1,0,0)", (int(mod_id), int(room_id)))
+        print("DELETING!")
         cursor.execute(f"""
         delete from bans where user_id=:user_id and room_id=:room_id
         """, (user_id, room_id))
@@ -131,12 +147,13 @@ def unbanUser():
         conn.commit()
         print("Unbanning ",user_id)
     except Exception as e:
-        print(e)
+        print("Error: ",str(e))
         return str(e)
     return f"Unban applied to {user_id}"
 
 @app.route("/api/rooms/create", methods=['POST'])
 def createRoom():
+    conn = pool.acquire()
     json = request.get_json()
     try:
         room_name = json['room_name']
@@ -155,6 +172,7 @@ def createRoom():
 
 @app.route("/api/rooms/delete", methods=['POST'])
 def deleteRoom():
+    conn = pool.acquire()
     json = request.get_json()
     try:
         room_id = json['room_id']
@@ -174,6 +192,7 @@ def deleteRoom():
 
 @app.route("/api/posts/delete", methods=['POST'])
 def deletePost():
+    conn = pool.acquire()
     json = request.get_json()
     m_id = json['m_id']
     post_id = json['post_id']
@@ -190,6 +209,7 @@ def deletePost():
 
 @app.route("/api/posts/modify", methods=['POST'])
 def modifyPost():
+    conn = pool.acquire()
     json = request.get_json()
     m_id = json['m_id']
     post_id = json['post_id']
@@ -207,6 +227,7 @@ def modifyPost():
 
 @app.route("/api/posts/deleteAll", methods=['DELETE'])
 def purgePost():
+    conn = pool.acquire()
     try:
         cursor = conn.cursor()
         cursor.execute("""
@@ -219,6 +240,7 @@ def purgePost():
         return str(e)
 @app.route('/api/moderators',methods=['GET'])
 def getModerators():
+    conn = pool.acquire()
     cursor = conn.cursor()
 
     userRows = []
@@ -229,6 +251,7 @@ def getModerators():
 
 @app.route("/api/moderators/permit", methods=['POST'])
 def permitMod():
+    conn = pool.acquire()
     json = request.get_json()
     cursor = conn.cursor()
 
@@ -249,6 +272,7 @@ def permitMod():
 
 @app.route("/api/moderators/revoke", methods=['POST'])
 def revokeMod():
+    conn = pool.acquire()
     json = request.get_json()
     cursor = conn.cursor()
 
@@ -265,6 +289,7 @@ def revokeMod():
 
 @app.route('/api/moderators/register',methods=['POST'])
 def registerModerators():
+    conn = pool.acquire()
     cursor = conn.cursor()
     request_json = request.get_json()
     username = request_json.get('username')
@@ -287,6 +312,7 @@ def registerModerators():
 
 @app.route('/api/users',methods=['GET'])
 def getUsers():
+    conn = pool.acquire()
     cursor = conn.cursor()
 
     userRows = []
@@ -297,6 +323,7 @@ def getUsers():
 
 @app.route('/api/rooms',methods=['GET'])
 def getRooms():
+    conn = pool.acquire()
     cursor = conn.cursor()
 
     roomRows = []
@@ -307,6 +334,7 @@ def getRooms():
 
 @app.route('/api/posts/<room_id>',methods=['GET'])
 def getPosts(room_id):
+    conn = pool.acquire()
     cursor = conn.cursor()
 
     postRows = []
@@ -328,6 +356,7 @@ def getPosts(room_id):
 
 @app.route('/api/posts/<room_id>/posted',methods=['GET'])
 def getTopPosts(room_id):
+    conn = pool.acquire()
     cursor = conn.cursor()
     postRows = []
 
@@ -345,6 +374,7 @@ def getTopPosts(room_id):
 
 @app.route("/api/upload", methods=['POST'])
 def uploadAttachment():
+    conn = pool.acquire()
     filename = str(uuid.uuid4())
     f = open("uploads/"+filename,"wb+")
     firstChunk = 1
@@ -385,6 +415,7 @@ def uploadAttachment():
 
 @app.route("/api/download/<attach_id>", methods=['GET'])
 def downloadAttachment(attach_id):
+    conn = pool.acquire()
     try:
         cursor = conn.cursor()
         cursor.execute(f"select filepath from attachments where attachment_id=:attach_id",(int(attach_id),))
@@ -435,6 +466,7 @@ def connect():
 
 @socketio.on("joinChat")
 def joinRoom(json_str):
+    conn = pool.acquire()
     jsonDict = json.loads(json_str)
 
     user_id = jsonDict["user_id"]
@@ -472,6 +504,7 @@ def joinRoom(json_str):
 # Recieve post from client, store in database broadcast to everyone else in the room
 @socketio.on("postChat")
 def postChat(json_str):
+    conn = pool.acquire()
     cursor = conn.cursor()
     
     print(json_str)
