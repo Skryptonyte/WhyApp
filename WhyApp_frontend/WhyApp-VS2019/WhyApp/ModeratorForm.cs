@@ -66,7 +66,8 @@ namespace WhyApp
 
             var banReq = new Dictionary<String, String>
             { {"user_id", banUserTextbos.Text },
-                {"room_id", roomIDBox.Value.ToString() }
+                {"room_id", roomIDBox.Value.ToString() },
+                {"m_id", modid.ToString() }
             };
 
             var stringContent = new System.Net.Http.StringContent(JsonConvert.SerializeObject(banReq), Encoding.UTF8, "application/json");
