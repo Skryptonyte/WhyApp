@@ -88,7 +88,7 @@ def registerUser():
         print("Failed to create user.")
         return "0"
     
-    return str(user_id.values[0][0])
+    return "1"
 
 #############################
 #### Privileged Requests ####
